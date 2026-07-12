@@ -1,0 +1,164 @@
+#EXTM3U x-tvg-url="https://epg.v1.mk/fy.xml"
+#EXTINF:-1 tvg-id="1" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV1.png" group-title="🏵️全網🏵️",CCTV1
+http://154.8.225.238:9991/migu/migu.php?id=608807420
+#EXTINF:-1 tvg-id="2" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV2.png" group-title="🏵️全網🏵️",CCTV2
+http://154.8.225.238:9991/migu/migu.php?id=631780532
+#EXTINF:-1 tvg-id="3" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV3.png" group-title="🏵️全網🏵️",CCTV3
+http://154.8.225.238:9991/migu/migu.php?id=624878271
+#EXTINF:-1 tvg-id="4" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV4.png" group-title="🏵️全網🏵️",CCTV4
+http://154.8.225.238:9991/migu/migu.php?id=631780421
+#EXTINF:-1 tvg-id="5" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV5.png" group-title="🏵️全網🏵️",CCTV5
+http://154.8.225.238:9991/migu/migu.php?id=641886683
+#EXTINF:-1 tvg-id="7" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV6.png" group-title="🏵️全網🏵️",CCTV6
+http://154.8.225.238:9991/migu/migu.php?id=624878396
+#EXTINF:-1 tvg-id="9" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV8.png" group-title="🏵️全網🏵️",CCTV8
+http://154.8.225.238:9991/migu/migu.php?id=624878356
+#EXTINF:-1 tvg-id="10" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV9.png" group-title="🏵️全網🏵️",CCTV9
+http://154.8.225.238:9991/migu/migu.php?id=673168140
+#EXTINF:-1 tvg-id="11" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV10.png" group-title="🏵️全網🏵️",CCTV10
+http://154.8.225.238:9991/migu/migu.php?id=624878405
+#EXTINF:-1 tvg-id="12" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV11.png" group-title="🏵️全網🏵️",CCTV11
+http://154.8.225.238:9991/migu/migu.php?id=667987558
+#EXTINF:-1 tvg-id="13" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV12.png" group-title="🏵️全網🏵️",CCTV12
+http://154.8.225.238:9991/migu/migu.php?id=673168185
+#EXTINF:-1 tvg-id="14" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV13.png" group-title="🏵️全網🏵️",CCTV13
+http://154.8.225.238:9991/migu/migu.php?id=608807423
+#EXTINF:-1 tvg-id="15" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV14.png" group-title="🏵️全網🏵️",CCTV14
+http://154.8.225.238:9991/migu/migu.php?id=624878440
+#EXTINF:-1 tvg-id="16" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV15.png" group-title="🏵️全網🏵️",CCTV15
+http://154.8.225.238:9991/migu/migu.php?id=673168223
+#EXTINF:-1 tvg-id="17" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV17.png" group-title="🏵️全網🏵️",CCTV17
+http://154.8.225.238:9991/migu/migu.php?id=673168256
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV1.png" group-title="🏵️央视🏵️",CCTV1
+http://38.75.136.137:98/gslb/dsdqbv/cctv1hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV2.png" group-title="🏵️央视🏵️",CCTV2
+http://38.75.136.137:98/gslb/dsdqbv/cctv2hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV3.png" group-title="🏵️央视🏵️",CCTV3
+http://38.75.136.137:98/gslb/dsdqbv/cctv3hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV4.png" group-title="🏵️央视🏵️",CCTV4
+http://38.75.136.137:98/gslb/dsdqbv/cctv4hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV5.png" group-title="🏵️央视🏵️",CCTV5
+http://38.75.136.137:98/gslb/dsdqbv/cctv5hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV6.png" group-title="🏵️央视🏵️",CCTV6
+http://38.75.136.137:98/gslb/dsdqbv/cctv6hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV7.png" group-title="🏵️央视🏵️",CCTV7
+http://38.75.136.137:98/gslb/dsdqbv/cctv7hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV8.png" group-title="🏵️央视🏵️",CCTV8
+http://38.75.136.137:98/gslb/dsdqbv/cctv8hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV9.png" group-title="🏵️央视🏵️",CCTV9
+http://38.75.136.137:98/gslb/dsdqbv/cctv9hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV10.png" group-title="🏵️央视🏵️",CCTV10
+http://38.75.136.137:98/gslb/dsdqbv/cctv10hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV11.png" group-title="🏵️央视🏵️",CCTV11
+http://38.75.136.137:98/gslb/dsdqbv/cctv11hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV12.png" group-title="🏵️央视🏵️",CCTV12
+http://38.75.136.137:98/gslb/dsdqbv/cctv12hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV13.png" group-title="🏵️央视🏵️",CCTV13
+http://38.75.136.137:98/gslb/dsdqbv/cctv13hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV14.png" group-title="🏵️央视🏵️",CCTV14
+http://38.75.136.137:98/gslb/dsdqbv/cctv14hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV15.png" group-title="🏵️央视🏵️",CCTV15
+http://38.75.136.137:98/gslb/dsdqbv/cctv15hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV16.png" group-title="🏵️央视🏵️",CCTV16
+http://38.75.136.137:98/gslb/dsdqbv/cctv16hd.m3u8?auth=test20251009
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/广东卫视.png" group-title="🏵️卫视🏵️",广东卫视
+http://204.12.221.218:8181/3m1080p/gdws.m3u8
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/江苏卫视.png" group-title="🏵️卫视🏵️",江苏卫视
+http://204.12.221.218:8181/3m1080p/jsws.m3u8
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/东方卫视.png" group-title="🏵️卫视🏵️",东方卫视
+http://204.12.221.218:8181/3m1080p/dfws.m3u8
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/江西卫视.png" group-title="🏵️卫视🏵️",江西卫视
+http://204.12.221.218:8181/3m1080p/jxws.m3u8
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/湖北卫视.png" group-title="🏵️卫视🏵️",湖北卫视
+http://204.12.221.218:8181/3m1080p/hbws.m3u8
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/吉林卫视.png" group-title="🏵️卫视🏵️",吉林卫视
+http://204.12.221.218:8181/3m1080p/jlws.m3u8
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/青海卫视.png" group-title="🏵️卫视🏵️",青海卫视
+http://204.12.221.218:8181/3m1080p/qhws.m3u8
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/河南卫视.png" group-title="🏵️卫视🏵️",河南卫视
+http://204.12.221.218:8181/3m1080p/dnws.m3u8
+#EXTINF:-1 tvg-id="影视资源交流2群https://t.me/zaya168" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://www.xn--rgv465a.top/tvlogo/央视台球.png" group-title="🏵️数字🏵️",央视台球
+http://173.208.212.130:8181/720p/ystq.m3u8
+#EXTINF:-1 tvg-id="影视资源交流2群https://t.me/zaya168" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://www.xn--rgv465a.top/tvlogo/风云音乐.png" group-title="🏵️数字🏵️",风云音乐
+http://173.208.212.130:8181/720p/fyyy.m3u8
+#EXTINF:-1 tvg-id="影视资源交流2群https://t.me/zaya168" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://www.xn--rgv465a.top/tvlogo/第一剧场.png" group-title="🏵️数字🏵️",第一剧场
+http://173.208.212.130:8181/720p/dyjc.m3u8
+#EXTINF:-1 tvg-id="影视资源交流2群https://t.me/zaya168" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://www.xn--rgv465a.top/tvlogo/风云剧场.png" group-title="🏵️数字🏵️",风云剧场
+http://173.208.212.130:8181/720p/fyjc.m3u8
+#EXTINF:-1 tvg-id="影视资源交流2群https://t.me/zaya168" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://www.xn--rgv465a.top/tvlogo/怀旧剧场.png" group-title="🏵️数字🏵️",怀旧剧场
+http://173.208.212.130:8181/720p/hjjc.m3u8
+#EXTINF:-1 tvg-id="影视资源交流2群https://t.me/zaya168" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://www.xn--rgv465a.top/tvlogo/女性时尚.png" group-title="🏵️数字🏵️",女性时尚
+http://173.208.212.130:8181/720p/nxss.m3u8
+#EXTINF:-1 tvg-id="影视资源交流2群https://t.me/zaya168" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://www.xn--rgv465a.top/tvlogo/高尔夫网球.png" group-title="🏵️数字🏵️",高尔夫网球
+http://173.208.212.130:8181/720p/gefwq.m3u8
+#EXTINF:-1 tvg-id="影视资源交流2群https://t.me/zaya168" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://www.xn--rgv465a.top/tvlogo/风云足球.png" group-title="🏵️数字🏵️",风云足球
+http://173.208.212.130:8181/720p/fyzq.m3u8
+#EXTINF:-1 tvg-id="影视资源交流2群https://t.me/zaya168" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://www.xn--rgv465a.top/tvlogo/世界地理.png" group-title="🏵️数字🏵️",世界地理
+http://173.208.212.130:8181/720p/sjdl.m3u8
+#EXTINF:-1 tvg-id="影视资源交流2群https://t.me/zaya168" tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://www.xn--rgv465a.top/tvlogo/兵器科技.png" group-title="🏵️数字🏵️",兵器科技
+http://173.208.212.130:8181/720p/gfjs.m3u8
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/04/b8d270755843fc9443e1c43dc231957c.png" group-title="🏵️轮播🏵️",射雕英雄传
+http://129.211.14.102:22223/1354210357
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/05/f997d4af51597ea26fd6b2bdb5d82b58.png" group-title="🏵️轮播🏵️",情满四合院
+http://129.211.14.102:22223/1382735541
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/05/43e4f86bf22593f0a3295947488c15c0.png" group-title="🏵️轮播🏵️",天龙八部
+http://129.211.14.102:22223/1351814644
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/05/8a8b223a7a8ec2d1649f4087ab259f31.png" group-title="🏵️轮播🏵️",封神榜
+http://129.211.14.102:22223/1353426319
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/05/737b3ff599106f5cb98c7e197ce3db69.png" group-title="🏵️轮播🏵️",新百娘子传奇
+http://129.211.14.102:22223/1354930969
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/05/5d52b28b4a09c31e4af547b28784871f.png" group-title="🏵️轮播🏵️",神雕侠侣
+http://129.211.14.102:22223/1351762426
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/05/d0736a468738af889c70cdc816f51c4e.png" group-title="🏵️轮播🏵️",灌篮高手
+http://129.211.14.102:22223/1356243352
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://www.lemonvod.xyz/tvicon/PhoenixCN.png" group-title="🏵️台湾🏵️",凤凰中文台
+http://rihou.cc:555/tv/[Pd]凤凰中文
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://www.lemonvod.xyz/tvicon/Phoenixnews.png" group-title="🏵️台湾🏵️",凤凰资讯台
+http://rihou.cc:555/tv/[Pd]凤凰资讯
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://www.lemonvod.xyz/tvicon/Phoenixhk.png" group-title="🏵️台湾🏵️",凤凰香港台
+http://rihou.cc:555/tv/[Pd]凤凰香港
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://www.lemonvod.xyz/tvicon/TVBxh.png" group-title="🏵️台湾🏵️",TVB星河
+http://rihou.cc:555/tv/[Pd]无线星河
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CTV1.png" group-title="🏵️台湾🏵️",中天新闻台
+http://mg.hmysapp.cn:177/%E5%81%B7%E6%BA%90%E7%8B%97/%E6%B8%AF%E6%BE%B3%E5%8F%B0/%E5%8F%B0%E6%B9%BE/%E4%B8%AD%E5%A4%A9%E6%96%B0%E8%81%9E%E5%8F%B0.php?id=301
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/TVBS1.png" group-title="🏵️台湾🏵️",TVBS新闻台
+http://mg.hmysapp.cn:177/%E5%81%B7%E6%BA%90%E7%8B%97/%E6%B8%AF%E6%BE%B3%E5%8F%B0/%E5%8F%B0%E6%B9%BE/TVBS%E6%96%B0%E8%81%9E%E5%8F%B0.php?id=301
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://www.lemonvod.xyz/tvicon/ebcnews.png" group-title="🏵️台湾🏵️",东森新闻台
+http://mg.hmysapp.cn:177/%E5%81%B7%E6%BA%90%E7%8B%97/%E6%B8%AF%E6%BE%B3%E5%8F%B0/%E5%8F%B0%E6%B9%BE/%E6%9D%B1%E6%A3%AE%E6%96%B0%E8%81%9E.php?id=301
+http://rihou.cc:555/tv/[Pd]龙华戏剧
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="http://www.lemonvod.xyz/tvicon/ftv.png" group-title="🏵️台湾🏵️",民视
+http://iptv.4666888.xyz/iptv2A.php?id=55
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/jy2.png" group-title="🏵️台湾🏵️",靖洋戲劇台
+http://iptv.4666888.xyz/iptv2A.php?id=42
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/FTV4.png" group-title="🏵️台湾🏵️",民视影劇台
+http://iptv.4666888.xyz/iptv2A.php?id=53
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/FTV4.png" group-title="🏵️台湾🏵️",民视影劇台
+https://cdn12.178.indevs.in/163189/msyj
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/GoldenTV8.png" group-title="🏵️台湾🏵️",靖天戲劇台
+https://cdn12.178.indevs.in/163189/jtxj
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/jy2.png" group-title="🏵️台湾🏵️",靖洋戲劇台
+https://cdn12.178.indevs.in/163189/jyxj
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://lemonvod.xyz/tvicon/logo_4gtv_4gtv-4gtv011_mobile-1.png" group-title="🏵️台湾🏵️",影迷数位电影台
+https://cdn12.178.indevs.in/163189/ymswdyt
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/04/e10bdc4d4e3fa195f6c9bff0643ffaff.png" group-title="🏵️彩虹🏵️",松視1臺
+https://gitee.com/iptxhd/jdjdfj/raw/master/3548.mp4
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/04/2426fdf338ffd6ba3f2fb2cc902e476f.png" group-title="🏵️彩虹🏵️",松視2臺
+https://gitee.com/iptxhd/jdjdfj/raw/master/3548.mp4
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/04/f653c86182cf747524ffb91716fdb42a.png" group-title="🏵️彩虹🏵️",松視3臺
+https://gitee.com/iptxhd/jdjdfj/raw/master/3548.mp4
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/04/a40534642318510cdc3856e0f43355fd.png" group-title="🏵️彩虹🏵️",松視4臺
+https://gitee.com/iptxhd/jdjdfj/raw/master/3548.mp4
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/04/158bcdb7bbb7bdd30e55d6417ff0ff56.png" group-title="🏵️彩虹🏵️",松視Happy臺
+https://gitee.com/iptxhd/jdjdfj/raw/master/3548.mp4
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/04/2896e69d51805eed6e5ef4f22077b9e9.png" group-title="🏵️彩虹🏵️",松視HiPlay臺
+https://gitee.com/iptxhd/jdjdfj/raw/master/3548.mp4
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/04/6b5228d4ddaf9797700a8f2ded842994.png" group-title="🏵️彩虹🏵️",松視極限臺
+https://gitee.com/iptxhd/jdjdfj/raw/master/3548.mp4
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/04/7c58c84cfd18bed519c8325818de2ce2.png" group-title="🏵️彩虹🏵️",松視潘多粉臺
+https://gitee.com/iptxhd/jdjdfj/raw/master/3548.mp4
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/04/bde558daa2b5d75060d9ba7d42c15f9a.png" group-title="🏵️彩虹🏵️",松視潘多紫臺
+https://gitee.com/iptxhd/jdjdfj/raw/master/3548.mp4
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/04/333aef471e4e62817116f75353801ed0.png" group-title="🏵️彩虹🏵️",松视驚艷臺
+https://gitee.com/iptxhd/jdjdfj/raw/master/3548.mp4
+#EXTINF:-1 tvg-name="影视资源交流2群https://t.me/zaya168" tvg-logo="https://img.wjwj.top/2026/07/05/1ce66f3fb5237a13d862b51bedf0bd3c.png" group-title="🏵️小草🏵️",查看分享码
+https://gitee.com/iptxhd/jdjdfj/raw/master/4567.mp4
