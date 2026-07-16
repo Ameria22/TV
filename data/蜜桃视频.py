@@ -17,7 +17,7 @@ import threading
 from urllib.parse import quote, unquote
 import urllib3
 
-# 禁用 HTTPS 证书警告
+# 禁用 HTTPS 证书警告，防止控制台爆警告日志导致盒子卡死
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 TIMEOUT = 10
@@ -37,7 +37,7 @@ PROXY_TYPE = 'mitao_img'
 
 
 # =====================================================================
-# 纯 Python AES-128-CBC 加解密 (不依赖任何外部 Crypto 库)
+# 纯 Python AES-128-CBC 加解密 (无需外部 Crypto 库，保证精简环境运行)
 # =====================================================================
 class SimpleAES:
     s_box = (
@@ -274,7 +274,7 @@ class Spider(BaseSpider):
         "deviceType": "H5-android",
     }
 
-    # ----------------- 内存级缓存（规避文件I/O崩溃） -----------------
+    # 内存缓存防止 I/O 异常
     _mem_speed_cache = {'host': '', 'ts': 0}
     _speed_cache_ttl = 1800
     _lock = threading.Lock()
@@ -527,9 +527,10 @@ class Spider(BaseSpider):
     def get_proxy_image_url(self, img_url):
         if not img_url:
             return ''
-        base_proxy = self.getProxyUrl()
+        # 依照规范，Python 的 getProxyUrl 需接受 boolean 参数，这里传 True 
+        base_proxy = self.getProxyUrl(True)
         if not base_proxy:
-            base_proxy = 'http://127.0.0.1:9980/proxy?do=py'
+            base_proxy = 'proxy://?do=py'
         return base_proxy + '&type=' + PROXY_TYPE + '&url=' + quote(img_url, safe='')
 
     def _fmt_duration(self, seconds):
@@ -542,7 +543,10 @@ class Spider(BaseSpider):
         m, s = divmod(s, 60)
         return f"{m}:{s:02d}"
 
-    def init(self, extend=""):
+    # =============================================================
+    # 核心修正 1：规范要求 init 方法必须接收 (context, extend) 
+    # =============================================================
+    def init(self, context, extend=""):
         cached_host, valid = self._get_cached_site()
         if valid:
             self.host = cached_host
@@ -550,12 +554,13 @@ class Spider(BaseSpider):
 
     _CATEGORY_BLACKLIST = {'成人游戏', '漫画', '小说', '蜜穴女友', '一键脱衣', '春药商城', '同城交友', '吃瓜', '成人漫画', '女优', '专题'}
 
-    # -------------------------------------------------------------
-    # 注意：根据 FongMi 规范，以下核心方法返回值必须是 JSON 序列化字符串
-    # -------------------------------------------------------------
+    # =============================================================
+    # 核心修正 2：所有的核心方法必须返回严格的 JSON String 字符串，
+    # 且 filter 必须映射为原生的 Python 布尔值 
+    # =============================================================
 
     def homeContent(self, filter):
-        """返回首页分类 JSON 字符串"""
+        """返回首页分类 JSON 字符串 """
         self._select_best_site()
         self._ensure_session()
 
@@ -625,7 +630,7 @@ class Spider(BaseSpider):
         filters['actor'] = _actors_filters
         classes.append({'type_id': 'topic', 'type_name': '专题'})
 
-        # 获取首页视频
+        # 获取首页默认推荐
         home_videos_raw = self.categoryContent('home', '1', False, {})
         try:
             home_videos = json.loads(home_videos_raw)
@@ -645,11 +650,11 @@ class Spider(BaseSpider):
         return json.dumps(res, ensure_ascii=False)
 
     def homeVideoContent(self):
-        """返回首页推荐视频 JSON 字符串"""
+        """返回首页推荐视频 JSON 字符串 """
         return self.categoryContent('home', '1', False, {})
 
     def categoryContent(self, tid, pg, filter, extend):
-        """返回分类列表 JSON 字符串"""
+        """返回分类列表 JSON 字符串 """
         tid = str(tid)
         pg = str(pg)
         pg_int = int(pg) if pg.isdigit() else 1
@@ -660,7 +665,7 @@ class Spider(BaseSpider):
         vod_list = []
         total_page = 1
 
-        # 解析 extend 参数（防止壳子的 Java HashMap 造成读取异常）
+        # 解析 extend 参数（Java HashMap 兼容处理） 
         ext_dict = {}
         if extend:
             try:
@@ -947,7 +952,7 @@ class Spider(BaseSpider):
         }
 
     def detailContent(self, ids):
-        """返回影片详情 JSON 字符串"""
+        """返回影片详情 JSON 字符串 """
         did = ids[0] if isinstance(ids, list) else ids
 
         self._select_best_site()
@@ -988,7 +993,7 @@ class Spider(BaseSpider):
         return json.dumps(res, ensure_ascii=False)
 
     def searchContent(self, key, quick, pg="1"):
-        """返回搜索列表 JSON 字符串"""
+        """返回搜索结果 JSON 字符串 """
         self._select_best_site()
         self._ensure_session()
 
@@ -1032,8 +1037,11 @@ class Spider(BaseSpider):
         }
         return json.dumps(res, ensure_ascii=False)
 
-    def playerContent(self, flag, id, vipFlags=None):
-        """返回播放解析 JSON 字符串"""
+    # =============================================================
+    # 核心修正 3：规范签名与实际完全匹配（注意是 vipFlags 并且类型为 list） 
+    # =============================================================
+    def playerContent(self, flag, id, vipFlags):
+        """返回播放解析结果 JSON 字符串 """
         self._select_best_site()
         self._ensure_session()
 
@@ -1052,7 +1060,7 @@ class Spider(BaseSpider):
             return json.dumps({'parse': 0, 'url': '', 'jx': 0})
 
         res = {
-            'parse': 0,      # 0 代表直接播放，FongMi 核心规范
+            'parse': 0,      # 0 代表直接播放 
             'url': play_url,  
             'jx': 0,
             'header': {
@@ -1062,16 +1070,20 @@ class Spider(BaseSpider):
         }
         return json.dumps(res, ensure_ascii=False)
 
-    # ============================================================
-    # 图片代理：localProxy 返回 [statusCode, mimeType, responseStream] 元组
-    # ============================================================
-    def localProxy(self, params):
+    # =============================================================
+    # 核心修正 4：必须定义为 proxy 方法名，且返回一个标准 Object 数组 
+    # =============================================================
+    def proxy(self, params):
+        """
+        本地代理回调。
+        Chaquopy 中调用时要求返回 [statusCode, mimeType, responseStream] 数组 。
+        """
         try:
-            p_type = params.get('type') if hasattr(params, 'get') else params[0]
+            p_type = params.get('type')
             if p_type != PROXY_TYPE:
                 return [404, 'text/plain', 'not found']
 
-            img_url = params.get('url', '') if hasattr(params, 'get') else params[1]
+            img_url = params.get('url', '')
             if not img_url:
                 return [400, 'text/plain', 'missing url']
 
@@ -1095,16 +1107,20 @@ class Spider(BaseSpider):
                         or (decoded[:4] == b'RIFF' and decoded[8:12] == b'WEBP'):
                     data = decoded
 
+            # 兼容：在 Python 环境中可以直接返回字节数组，或者 io.BytesIO(data)
+            import io
+            stream = io.BytesIO(data)
+
             if data[:2] == b'\xff\xd8':
-                return [200, 'image/jpeg', data, {'Content-Length': str(len(data))}]
+                return [200, 'image/jpeg', stream]
             elif data[:4] == b'\x89PNG':
-                return [200, 'image/png', data, {'Content-Length': str(len(data))}]
+                return [200, 'image/png', stream]
             elif data[:4] == b'RIFF' and data[8:12] == b'WEBP':
-                return [200, 'image/webp', data, {'Content-Length': str(len(data))}]
+                return [200, 'image/webp', stream]
             else:
                 mime = r.headers.get('Content-Type', 'image/jpeg')
-                if mime.startswith('image/'):
-                    return [200, mime, data, {'Content-Length': str(len(data))}]
-                return [404, 'text/plain', 'invalid image format']
+                return [200, mime, stream]
         except Exception:
-            return [500, 'text/plain', 'proxy error']
+            # 异常时返回空输入流或错误
+            import io
+            return [500, 'text/plain', io.BytesIO(b'proxy error')]
