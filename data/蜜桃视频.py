@@ -17,7 +17,7 @@ import threading
 from urllib.parse import quote, unquote
 import urllib3
 
-# 忽略 SSL 证书警告，防止控制台爆警告日志导致盒子卡死
+# 禁用 HTTPS 证书警告
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 TIMEOUT = 10
@@ -37,13 +37,9 @@ PROXY_TYPE = 'mitao_img'
 
 
 # =====================================================================
-# 纯 Python 实现的 AES-128-CBC 加解密 (不依赖 Crypto 库)
+# 纯 Python AES-128-CBC 加解密 (不依赖任何外部 Crypto 库)
 # =====================================================================
 class SimpleAES:
-    """
-    一个轻量级的纯 Python AES 128 CBC 实现，用于避免盒子环境缺少 pycryptodome 库的问题。
-    包含基本的字节处理及矩阵变换。
-    """
     s_box = (
         0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
         0xca, 0x82, 0xc9, 0x7d, 0xfa, 0x59, 0x47, 0xf0, 0xad, 0xd4, 0xa2, 0xaf, 0x9c, 0xa4, 0x72, 0xc0,
@@ -554,7 +550,12 @@ class Spider(BaseSpider):
 
     _CATEGORY_BLACKLIST = {'成人游戏', '漫画', '小说', '蜜穴女友', '一键脱衣', '春药商城', '同城交友', '吃瓜', '成人漫画', '女优', '专题'}
 
+    # -------------------------------------------------------------
+    # 注意：根据 FongMi 规范，以下核心方法返回值必须是 JSON 序列化字符串
+    # -------------------------------------------------------------
+
     def homeContent(self, filter):
+        """返回首页分类 JSON 字符串"""
         self._select_best_site()
         self._ensure_session()
 
@@ -624,8 +625,14 @@ class Spider(BaseSpider):
         filters['actor'] = _actors_filters
         classes.append({'type_id': 'topic', 'type_name': '专题'})
 
-        home_videos = self.categoryContent('home', 1, '', {})
-        return {
+        # 获取首页视频
+        home_videos_raw = self.categoryContent('home', '1', False, {})
+        try:
+            home_videos = json.loads(home_videos_raw)
+        except Exception:
+            home_videos = {}
+
+        res = {
             'class': classes,
             'filters': filters,
             'type': '影视',
@@ -635,18 +642,32 @@ class Spider(BaseSpider):
             'limit': home_videos.get('limit', 0),
             'total': home_videos.get('total', 0),
         }
+        return json.dumps(res, ensure_ascii=False)
 
-    def homeVideoContent(self, tid, pg, filter, extend):
-        return self.categoryContent(tid or 'home', pg, filter, extend)
+    def homeVideoContent(self):
+        """返回首页推荐视频 JSON 字符串"""
+        return self.categoryContent('home', '1', False, {})
 
     def categoryContent(self, tid, pg, filter, extend):
+        """返回分类列表 JSON 字符串"""
         tid = str(tid)
-        pg = int(pg)
+        pg = str(pg)
+        pg_int = int(pg) if pg.isdigit() else 1
 
         self._select_best_site()
         self._ensure_session()
 
         vod_list = []
+        total_page = 1
+
+        # 解析 extend 参数（防止壳子的 Java HashMap 造成读取异常）
+        ext_dict = {}
+        if extend:
+            try:
+                for k in extend.keys():
+                    ext_dict[str(k)] = str(extend[k])
+            except Exception:
+                pass
 
         if '@' in tid:
             real_tid = tid.replace('@', '')
@@ -664,136 +685,132 @@ class Spider(BaseSpider):
                 if actor_name:
                     resp = self._api_request('/ht/content/search', {
                         'keywords': actor_name,
-                        'pageNo': str(pg - 1),
+                        'pageNo': str(pg_int - 1),
                         'pageSize': '20',
                     })
                 else:
                     resp = self._api_request('/ht/content/queryTypeVideosH5', {
                         'actorId': actor_id,
-                        'pageNo': str(pg - 1),
+                        'pageNo': str(pg_int - 1),
                         'pageSize': '20',
                         'type': '1',
                     })
 
-                if not resp or resp.get('code') != 10000:
-                    return {'list': [], 'page': pg, 'pagecount': 1, 'limit': 0, 'total': 0}
+                if resp and resp.get('code') == 10000:
+                    data = resp.get('data', {})
+                    vod_list = self._extract_videos_from_data(data)
+                    total_page = int(data.get('totalPage') or data.get('total_page') or 1)
 
-                data = resp.get('data', {})
-                vod_list = self._extract_videos_from_data(data)
-                total_page = int(data.get('totalPage') or data.get('total_page') or 1)
-                return {'list': vod_list, 'page': pg, 'pagecount': max(total_page, 1),
-                        'limit': len(vod_list), 'total': max(total_page, 1) * 20}
+                res = {'list': vod_list, 'page': pg_int, 'pagecount': max(total_page, 1),
+                       'limit': len(vod_list), 'total': max(total_page, 1) * 20}
+                return json.dumps(res, ensure_ascii=False)
 
             elif real_tid.startswith('topic_'):
                 topic_id = real_tid[len('topic_'):]
                 resp = self._api_request('/ht/content/queryOriTopicVideos', {
                     'topicId': topic_id,
-                    'pageNo': str(pg - 1),
+                    'pageNo': str(pg_int - 1),
                     'pageSize': '20',
                 })
-                if not resp or resp.get('code') != 10000:
-                    return {'list': [], 'page': pg, 'pagecount': 1, 'limit': 0, 'total': 0}
+                if resp and resp.get('code') == 10000:
+                    data = resp.get('data', {})
+                    vod_list = self._extract_videos_from_data(data)
+                    total_page = int(data.get('totalPage') or data.get('total_page') or 1)
 
-                data = resp.get('data', {})
-                vod_list = self._extract_videos_from_data(data)
-                total_page = int(data.get('totalPage') or data.get('total_page') or 1)
-                return {'list': vod_list, 'page': pg, 'pagecount': max(total_page, 1),
+                res = {'list': vod_list, 'page': pg_int, 'pagecount': max(total_page, 1),
                         'limit': len(vod_list), 'total': max(total_page, 1) * 20}
+                return json.dumps(res, ensure_ascii=False)
 
             else:
-                return {'list': [], 'page': pg, 'pagecount': 1, 'limit': 0, 'total': 0}
+                return json.dumps({'list': [], 'page': pg_int, 'pagecount': 1, 'limit': 0, 'total': 0})
 
         if tid == 'actor':
             api_params = {
-                'pageNo': str(pg - 1),
+                'pageNo': str(pg_int - 1),
                 'pageSize': '20',
             }
-            if isinstance(extend, dict):
-                _actor_filter_map = {
-                    'height': 'actorHeight',
-                    'cup': 'cupSize',
-                    'birthday': 'actorBirthday',
-                    'debut': 'actorDebut',
-                }
-                for ek, ak in _actor_filter_map.items():
-                    val = extend.get(ek, '')
-                    if val:
-                        api_params[ak] = val
+            _actor_filter_map = {
+                'height': 'actorHeight',
+                'cup': 'cupSize',
+                'birthday': 'actorBirthday',
+                'debut': 'actorDebut',
+            }
+            for ek, ak in _actor_filter_map.items():
+                val = ext_dict.get(ek, '')
+                if val:
+                    api_params[ak] = val
 
             resp = self._api_request('/ht/content/getActors', api_params)
-            if not resp or resp.get('code') != 10000:
-                return {'list': [], 'page': pg, 'pagecount': 1, 'limit': 0, 'total': 0}
+            if resp and resp.get('code') == 10000:
+                data = resp.get('data', {})
+                vod_list = self._parse_actor_list(data)
+                total_page = int(data.get('totalPage') or 1)
 
-            data = resp.get('data', {})
-            vod_list = self._parse_actor_list(data)
-            total_page = int(data.get('totalPage') or 1)
-            return {'list': vod_list, 'page': pg, 'pagecount': total_page,
+            res = {'list': vod_list, 'page': pg_int, 'pagecount': total_page,
                     'limit': len(vod_list), 'total': total_page * 20}
+            return json.dumps(res, ensure_ascii=False)
 
         if tid == 'topic':
             resp = self._api_request('/ht/content/getOriTopicList', {
-                'pageNo': str(pg - 1),
+                'pageNo': str(pg_int - 1),
                 'pageSize': '20',
             })
-            if not resp or resp.get('code') != 10000:
-                return {'list': [], 'page': pg, 'pagecount': 1, 'limit': 0, 'total': 0}
+            if resp and resp.get('code') == 10000:
+                data = resp.get('data', {})
+                vod_list = self._parse_topic_list(data)
 
-            data = resp.get('data', {})
-            vod_list = self._parse_topic_list(data)
-            return {'list': vod_list, 'page': pg, 'pagecount': 50, 'limit': len(vod_list),
+            res = {'list': vod_list, 'page': pg_int, 'pagecount': 50, 'limit': len(vod_list),
                     'total': len(vod_list) * 50}
+            return json.dumps(res, ensure_ascii=False)
 
         if tid in ('home', 'new', 'hot'):
             sort_map = {'home': '1', 'new': '1', 'hot': '2'}
             resp = self._api_request('/ht/content/queryTypeVideosH5', {
-                'pageNo': str(pg - 1),
+                'pageNo': str(pg_int - 1),
                 'pageSize': '20',
                 'sort': sort_map.get(tid, '1'),
                 'type': '1',
             })
-            if not resp or resp.get('code') != 10000:
-                return {'list': [], 'page': pg, 'pagecount': 1, 'limit': 0, 'total': 0}
-
-            data = resp.get('data', {})
-            items = (data.get('typeVideoList') or data.get('list') or data.get('data') or data.get('videoList') or [])
-            if isinstance(items, list):
-                for v in items:
-                    parsed = self._parse_video(v)
-                    if parsed:
-                        vod_list.append(parsed)
+            if resp and resp.get('code') == 10000:
+                data = resp.get('data', {})
+                items = (data.get('typeVideoList') or data.get('list') or data.get('data') or data.get('videoList') or [])
+                if isinstance(items, list):
+                    for v in items:
+                        parsed = self._parse_video(v)
+                        if parsed:
+                            vod_list.append(parsed)
+                total_page = int(data.get('totalPage') or 1)
         else:
             api_params = {
-                'pageNo': str(pg - 1),
+                'pageNo': str(pg_int - 1),
                 'pageSize': '20',
                 'typeId': tid,          
                 'type': '1',            
             }
-            if isinstance(extend, dict):
-                for key in ('label', 'tag', 'sort'):
-                    val = extend.get(key, '')
-                    if val:
-                        api_params[key] = val
+            for key in ('label', 'tag', 'sort'):
+                val = ext_dict.get(key, '')
+                if val:
+                    api_params[key] = val
 
             resp = self._api_request('/ht/content/queryTypeVideosH5', api_params)
-            if not resp or resp.get('code') != 10000:
-                return {'list': [], 'page': pg, 'pagecount': 1, 'limit': 0, 'total': 0}
+            if resp and resp.get('code') == 10000:
+                data = resp.get('data', {})
+                items = (data.get('typeVideoList') or data.get('list') or data.get('data') or data.get('videoList') or [])
+                if isinstance(items, list):
+                    for v in items:
+                        parsed = self._parse_video(v)
+                        if parsed:
+                            vod_list.append(parsed)
+                total_page = int(data.get('totalPage') or 1)
 
-            data = resp.get('data', {})
-            items = (data.get('typeVideoList') or data.get('list') or data.get('data') or data.get('videoList') or [])
-            if isinstance(items, list):
-                for v in items:
-                    parsed = self._parse_video(v)
-                    if parsed:
-                        vod_list.append(parsed)
-
-        total_page = int(data.get('totalPage') or 1)
-        return {
+        res = {
             'list': vod_list,
-            'page': pg,
+            'page': pg_int,
             'pagecount': total_page,
             'limit': len(vod_list),
             'total': total_page * 20,
         }
+        return json.dumps(res, ensure_ascii=False)
 
     def _extract_videos_from_data(self, data):
         if isinstance(data, list):
@@ -930,6 +947,7 @@ class Spider(BaseSpider):
         }
 
     def detailContent(self, ids):
+        """返回影片详情 JSON 字符串"""
         did = ids[0] if isinstance(ids, list) else ids
 
         self._select_best_site()
@@ -937,11 +955,11 @@ class Spider(BaseSpider):
 
         resp = self._api_request('/ht/content/detail', {'contentId': str(did)})
         if not resp or resp.get('code') != 10000:
-            return {'list': []}
+            return json.dumps({'list': []})
 
         detail = resp.get('data', {})
         if not detail:
-            return {'list': []}
+            return json.dumps({'list': []})
 
         title = (detail.get('title') or detail.get('name') or
                  detail.get('videoTitle') or '未知标题')
@@ -951,10 +969,9 @@ class Spider(BaseSpider):
         duration = detail.get('duration', 0)
         actor = detail.get('actor') or detail.get('actors') or ''
 
-        # 适配 FongMi: vod_play_url = '源名称$播放ID'
         vod_play_url = '蜜桃源$' + str(did)
 
-        return {'list': [{
+        res = {'list': [{
             'vod_id': str(did),
             'vod_name': title,
             'vod_pic': self.get_proxy_image_url(pic) if pic else '',
@@ -968,19 +985,21 @@ class Spider(BaseSpider):
             'vod_play_url': vod_play_url,
             'type': 'video',
         }]}
+        return json.dumps(res, ensure_ascii=False)
 
-    def searchContent(self, key, quick, pg=1):
+    def searchContent(self, key, quick, pg="1"):
+        """返回搜索列表 JSON 字符串"""
         self._select_best_site()
         self._ensure_session()
 
-        pg = int(pg)
+        pg_int = int(pg) if str(pg).isdigit() else 1
         resp = self._api_request('/ht/content/search', {
             'keywords': key,
-            'pageNo': pg - 1,
+            'pageNo': pg_int - 1,
             'pageSize': 20,
         })
         if not resp or resp.get('code') != 10000:
-            return {'list': [], 'page': pg, 'pagecount': 1, 'limit': 0, 'total': 0}
+            return json.dumps({'list': [], 'page': pg_int, 'pagecount': 1, 'limit': 0, 'total': 0})
 
         data = resp.get('data', {})
 
@@ -996,38 +1015,33 @@ class Spider(BaseSpider):
                   or data.get('content')
                   or [])
         else:
-            return {'list': [], 'page': pg, 'pagecount': 1, 'limit': 0, 'total': 0}
+            return json.dumps({'list': [], 'page': pg_int, 'pagecount': 1, 'limit': 0, 'total': 0})
 
         if not isinstance(items, list):
-            return {'list': [], 'page': pg, 'pagecount': 1, 'limit': 0, 'total': 0}
+            return json.dumps({'list': [], 'page': pg_int, 'pagecount': 1, 'limit': 0, 'total': 0})
 
         vod_list = [p for v in items if (p := self._parse_video(v))]
         total_page = int(data.get('totalPage') or 1) if isinstance(data, dict) else max(1, len(vod_list) // 20)
-        return {
+        
+        res = {
             'list': vod_list,
-            'page': pg,
+            'page': pg_int,
             'pagecount': total_page,
             'limit': len(vod_list),
             'total': total_page * 20,
         }
+        return json.dumps(res, ensure_ascii=False)
 
-    # ============================================================
-    # 核心修正：规范的 FongMi 播放器接口，确保能正常解析播放
-    # ============================================================
     def playerContent(self, flag, id, vipFlags=None):
-        """
-        FongMi 专用的播放器接口方法。
-        当客户端点击播放时，FongMi 会调用这个方法，传入上面 detailContent 里绑定好的唯一标识（ID）。
-        """
+        """返回播放解析 JSON 字符串"""
         self._select_best_site()
         self._ensure_session()
 
-        # id 即为我们在 detailContent 绑定返回的视频 did
         video_id = id
 
         resp = self._api_request('/ht/content/detail', {'contentId': str(video_id)})
         if not resp or resp.get('code') != 10000:
-            return {'parse': 0, 'url': '', 'jx': 0}
+            return json.dumps({'parse': 0, 'url': '', 'jx': 0})
 
         detail = resp.get('data', {})
         play_url = (detail.get('videoUrl') or detail.get('playUrl') or
@@ -1035,27 +1049,29 @@ class Spider(BaseSpider):
                     detail.get('sl') or '')
 
         if not play_url:
-            return {'parse': 0, 'url': '', 'jx': 0}
+            return json.dumps({'parse': 0, 'url': '', 'jx': 0})
 
-        return {
-            'parse': 0,      # 0代表直接播放
-            'url': play_url,  # 真实的 .m3u8 / .mp4 视频流地址
+        res = {
+            'parse': 0,      # 0 代表直接播放，FongMi 核心规范
+            'url': play_url,  
             'jx': 0,
             'header': {
                 'User-Agent': self.headers['User-Agent'],
                 'Referer': self.host + '/',
             },
         }
+        return json.dumps(res, ensure_ascii=False)
 
     # ============================================================
-    # 图片代理
+    # 图片代理：localProxy 返回 [statusCode, mimeType, responseStream] 元组
     # ============================================================
     def localProxy(self, params):
         try:
-            if params.get('type') != PROXY_TYPE:
+            p_type = params.get('type') if hasattr(params, 'get') else params[0]
+            if p_type != PROXY_TYPE:
                 return [404, 'text/plain', 'not found']
 
-            img_url = params.get('url', '')
+            img_url = params.get('url', '') if hasattr(params, 'get') else params[1]
             if not img_url:
                 return [400, 'text/plain', 'missing url']
 
@@ -1071,7 +1087,7 @@ class Spider(BaseSpider):
 
             data = r.content
 
-            # XOR 0x88 自动解密 (蜜桃图片防盗链)
+            # XOR 0x88 自动解密防盗链图片
             if data[:2] != b'\xff\xd8' and data[:4] != b'\x89PNG' \
                     and not (data[:4] == b'RIFF' and data[8:12] == b'WEBP'):
                 decoded = bytes(b ^ 0x88 for b in data)
